@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <title>User Information</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <style>
+      .border {
+        border: solid 3px grey;
+        background: #e4e4e4;
+      }
+      .border2 {
+        border: solid 1px grey;
+        background: #e9e9e9;
+      }
+      .top {
+        margin-top: 25px;
+      }
+      .bottom {
+        margin-bottom: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Test App</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/logoff"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+          </ul>
+       </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row"><h2>{{user['first_name']}} {{user['last_name']}}</h2></div>
+        <div class="row">
+          <div class="col-md-2 col-xs-6">Registered at:</div>
+          <div class="col-md-10 col-xs-6"> {{user['created_at']}} </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-xs-6">User ID:</div>
+          <div class="col-md-10 col-xs-6"> {{user['id']}} </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-xs-6">Email address:</div>
+          <div class="col-md-10 col-xs-6"> {{user['email']}} </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-xs-6">Descriptiont:</div>
+          <div class="col-md-10 col-xs-6"> {{user['description']}} </div>
+        </div>
+        <div class="row"><h2>Leave a message for {{user['first_name']}}</h2></div>
+        <form action='/messages/create/{{ user['id'] }}' method='post'>
+          <div class="form-group">
+            <textarea class="form-control" rows="5" name="comment"></textarea>
+          </div>
+          <div class="form-group">
+            <button type='submit' class='btn btn-primary pull-right'>Post</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-xs-10 col-xs-offset-1 top">
+        <div class="col-xs-9">Mark Gullen wrote</div>
+        <div class="col-xs-3  text-right">TIME</div>
+        <div class="col-xs-12 border">
+          Hi Michal! I amhaving fun building BoomYEAH!@
+        </div>
+      </div>
+
+      <div class="col-xs-9 col-xs-offset-2">
+        <div class="col-xs-9">Someone wrote</div>
+        <div class="col-xs-3  text-right">TIME</div>
+        <div class="col-xs-12 border2">
+          Testing a comment
+        </div>
+      </div>
+
+      <div class="col-xs-9 col-xs-offset-2">
+        <form action="" style='margin-top: 25px;'>
+          <div class="form-group">
+            <textarea class="form-control" rows="1" name="comment" placeholder='Enter a comment here'></textarea>
+          </div>
+          <div class="form-group">
+            <button type='submit' class='btn btn-primary pull-right'>Post</button>
+          </div>
+        </form>
+      </div>
+      {% for msg in messages %}
+      <div class="col-xs-10 col-xs-offset-1 top">
+        <div class="col-md-9 col-xs-6">{{ msg['first_name'] }} {{ msg['last_name'] }} wrote</div>
+        <div class="col-md-3 col-xs-6 text-right">{{ msg['created_at'] }}</div>
+        <div class="col-xs-12 border">
+          {{ msg['text'] }}
+        </div>
+      </div>
+      {% for comment in comments %}
+      <div class="col-xs-9 col-xs-offset-2">
+        <div class="col-xs-9">Someone wrote</div>
+        <div class="col-xs-3  text-right">TIME</div>
+        <div class="col-xs-12 border2">
+          Testing a comment
+        </div>
+      </div>
+      {% endfor %}
+      <div class="col-xs-9 col-xs-offset-2">
+        <form action="/comments/create/{{ user['id'] }}" method='post' style='margin-top: 25px;'>
+          <input type="hidden" name='msg_id' value='{{ msg['id'] }}'>
+          <div class="form-group">
+            <textarea class="form-control" rows="1" name="comment" placeholder='Enter a comment here'></textarea>
+          </div>
+          <div class="form-group">
+            <button type='submit' class='btn btn-primary pull-right'>Post</button>
+          </div>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

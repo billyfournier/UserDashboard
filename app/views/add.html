@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>Register</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <style>
+      .border {
+        border: solid 3px grey;
+        background: lightgrey;
+      }
+      .top {
+        margin-top: 25px;
+      }
+      .bottom {
+        margin-bottom: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Test App</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+          </ul>
+       </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+        <form action='/users/add' method='post' class="form col-xs-5">
+          <div class="form-group">
+            <h2>Add a new user</h2>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" name="email" id="email">
+          </div>
+          <div class="form-group">
+            <label for="fname">First name:</label>
+            <input type="text" class="form-control" name="fname" id="fname">
+          </div>
+          <div class="form-group">
+            <label for="lname">Last name:</label>
+            <input type="text" class="form-control" name="lname" id="lname">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" name='pwd' id="pwd">
+          </div>
+          <div class="form-group">
+            <label for="pwdc">Confirm Password:</label>
+            <input type="password" class="form-control" name='pwdc' id="pwd">
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Create</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
