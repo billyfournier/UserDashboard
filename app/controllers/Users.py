@@ -6,6 +6,7 @@ class Users(Controller):
         super(Users, self).__init__(action)
         self.load_model('UserModel')
         self.load_model('MessageModel')
+        self.load_model('CommentModel')
         self.db = self._app.db
 
 
@@ -61,4 +62,14 @@ class Users(Controller):
         tx =  session['user']
         user = self.models['UserModel'].get_user(rx_id)
         msgs = self.models['MessageModel'].get_messages(rx_id)
+        comments = self.models['CommentModel'].get_comments()
+        messages = []
+        for msg in msgs:
+            messages.append(msg)
+            messages[-1]['comments'] = []
+            m = messages[-1]['comments']
+            for comment in comments:
+                if msg['id'] == comment['message_id']:
+                    m.append(comment)
+        msgs = messages
         return self.load_view('message.html', user=user, me=tx, messages=msgs)

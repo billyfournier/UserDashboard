@@ -67,32 +67,6 @@
         </form>
       </div>
 
-      <div class="col-xs-10 col-xs-offset-1 top">
-        <div class="col-xs-9">Mark Gullen wrote</div>
-        <div class="col-xs-3  text-right">TIME</div>
-        <div class="col-xs-12 border">
-          Hi Michal! I amhaving fun building BoomYEAH!@
-        </div>
-      </div>
-
-      <div class="col-xs-9 col-xs-offset-2">
-        <div class="col-xs-9">Someone wrote</div>
-        <div class="col-xs-3  text-right">TIME</div>
-        <div class="col-xs-12 border2">
-          Testing a comment
-        </div>
-      </div>
-
-      <div class="col-xs-9 col-xs-offset-2">
-        <form action="" style='margin-top: 25px;'>
-          <div class="form-group">
-            <textarea class="form-control" rows="1" name="comment" placeholder='Enter a comment here'></textarea>
-          </div>
-          <div class="form-group">
-            <button type='submit' class='btn btn-primary pull-right'>Post</button>
-          </div>
-        </form>
-      </div>
       {% for msg in messages %}
       <div class="col-xs-10 col-xs-offset-1 top">
         <div class="col-md-9 col-xs-6">{{ msg['first_name'] }} {{ msg['last_name'] }} wrote</div>
@@ -101,12 +75,12 @@
           {{ msg['text'] }}
         </div>
       </div>
-      {% for comment in comments %}
+      {% for comment in msg['comments'] %}
       <div class="col-xs-9 col-xs-offset-2">
-        <div class="col-xs-9">Someone wrote</div>
-        <div class="col-xs-3  text-right">TIME</div>
+        <div class="col-xs-6">{{comment['first_name']}} {{comment['last_name']}} wrote</div>
+        <div class="col-xs-6  text-right">{{comment['created_at']}}</div>
         <div class="col-xs-12 border2">
-          Testing a comment
+          {{ comment['text'] }}
         </div>
       </div>
       {% endfor %}

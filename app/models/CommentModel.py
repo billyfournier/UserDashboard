@@ -14,7 +14,8 @@ class CommentModel(Model):
         self.db.query_db(query, data)
         return True
 
-    def get_comments(self,rx_id):
-        query = 'SELECT * FROM comments WHERE comments.message_id = '
-        # msgs = self.db.query_db(query,{'rx_id':rx_id})
-        return msgs
+    def get_comments(self):
+        query =  'SELECT comments.*, users.first_name, users.last_name FROM comments '
+        query += 'JOIN users ON comments.user_id = users.id'
+        comments = self.db.query_db(query)
+        return comments
